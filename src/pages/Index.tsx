@@ -122,7 +122,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-transparent">
       {/* Hero Section */}
       <section
         className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
