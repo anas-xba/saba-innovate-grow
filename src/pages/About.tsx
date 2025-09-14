@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -7,6 +8,27 @@ import manufacturingImage from "@/assets/manufacturing.jpg";
 import laboratoryImage from "@/assets/laboratory.jpg";
 
 const About = () => {
+  // Scroll animation observer
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-scale');
+    animatedElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const stats = [
     { number: "500+", label: "Production Capacity (MT)", icon: Factory },
     { number: "35+", label: "Years of Experience", icon: Award },
@@ -68,21 +90,23 @@ const About = () => {
     <div className="min-h-screen bg-transparent">
       {/* Hero Section */}
       <section
-        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="relative h-screen flex items-center bg-cover bg-center bg-no-repeat parallax"
         style={{ backgroundImage: `url(${aboutBuilding})` }}
       >
         <div className="absolute inset-0 bg-gradient-overlay"></div>
-        <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <h1 className="hero-text text-primary-foreground mb-6">
-            Decades of Innovation,
-            <span className="block gradient-text">Built for Tomorrow</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8 leading-relaxed">
-            Over 37 years of excellence in chemical solutions, driving innovation across industries worldwide.
-          </p>
-          <Button variant="hero" size="lg">
-            Discover Our Story
-          </Button>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 lg:px-8 w-full">
+          <div className="text-left max-w-4xl">
+            <h1 className="hero-text text-white mb-6 animate-fade-in-up">
+              Decades of Innovation,
+              <span className="block gradient-text animate-fade-in-up stagger-2">Built for Tomorrow</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed animate-fade-in-up stagger-3 max-w-3xl">
+              Over 37 years of excellence in chemical solutions, driving innovation across industries worldwide.
+            </p>
+            <Button variant="hero" size="lg" className="animate-fade-in-up stagger-4 hover-lift micro-bounce">
+              Discover Our Story
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -90,13 +114,13 @@ const About = () => {
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="section-title mb-8 text-foreground">
+            <div className="scroll-animate-left text-left">
+              <h2 className="section-title mb-8 text-white">
                 Over 37+ Years of
                 <span className="gradient-text block">Experience</span>
               </h2>
               <div className="space-y-6">
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-white/80 leading-relaxed">
                   Since 1988, Saba Group has been at the forefront of chemical innovation, 
                   providing cutting-edge solutions that drive industrial progress. Our journey 
                   began with a vision to revolutionize the chemical industry through quality and innovation.
@@ -108,21 +132,21 @@ const About = () => {
                     "Global presence across 15+ countries",
                     "24/7 technical support and consultation",
                   ].map((item, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
-                      <span className="text-foreground">{item}</span>
+                    <div key={index} className="flex items-center space-x-3 animate-fade-in-left" style={{ animationDelay: `${index * 0.1}s` }}>
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 animate-pulse-custom" />
+                      <span className="text-white">{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative scroll-animate-right">
               <img
                 src={manufacturingImage}
                 alt="Saba Group Manufacturing Facility"
-                className="rounded-2xl shadow-corporate w-full h-96 object-cover"
+                className="rounded-2xl shadow-corporate w-full h-96 object-cover hover-glow transition-all duration-500"
               />
-              <div className="absolute -bottom-6 -left-6 bg-primary text-primary-foreground p-6 rounded-xl shadow-lg">
+              <div className="absolute -bottom-6 -left-6 bg-primary text-primary-foreground p-6 rounded-xl shadow-lg animate-float">
                 <div className="text-center">
                   <div className="text-3xl font-bold">37+</div>
                   <div className="text-sm">Years Excellence</div>
@@ -134,9 +158,10 @@ const About = () => {
       </section>
 
       {/* Highlight Card */}
-      <section className="py-16 bg-primary">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="py-16 bg-gradient-primary relative overflow-hidden">
+        <div className="absolute inset-0 animate-shimmer"></div>
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-left scroll-animate">
             <h3 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
               Driving Innovation Through High-Quality Chemical Solutions
             </h3>
@@ -149,24 +174,24 @@ const About = () => {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-black/20 backdrop-blur-sm">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="section-title mb-6">
+          <div className="text-left mb-16 scroll-animate">
+            <h2 className="section-title mb-6 text-white">
               Our <span className="gradient-text">Impact</span> in Numbers
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white/80 max-w-2xl">
               Decades of excellence reflected in our production capacity and global reach.
             </p>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center p-8 hover-lift transition-all duration-500 bg-white/10 backdrop-blur-sm border-white/20 scroll-animate-scale" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-0">
-                  <stat.icon className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <div className="text-4xl font-bold text-foreground mb-2">{stat.number}</div>
-                  <div className="text-muted-foreground font-medium">{stat.label}</div>
+                  <stat.icon className="w-12 h-12 text-primary mx-auto mb-4 animate-rotate-in" />
+                  <div className="text-4xl font-bold text-white mb-2 animate-pulse-custom">{stat.number}</div>
+                  <div className="text-white/80 font-medium">{stat.label}</div>
                 </CardContent>
               </Card>
             ))}
@@ -177,29 +202,29 @@ const About = () => {
       {/* Products We Cater */}
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="section-title mb-6">
+          <div className="text-left mb-16 scroll-animate">
+            <h2 className="section-title mb-6 text-white">
               Products <span className="gradient-text">We Cater</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white/80 max-w-2xl">
               Comprehensive solutions across diverse industries and applications.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {products.map((product, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow group">
+              <Card key={index} className="overflow-hidden hover-lift transition-all duration-500 group bg-white/10 backdrop-blur-sm border-white/20 scroll-animate" style={{ animationDelay: `${index * 0.2}s` }}>
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 transition-colors"></div>
+                  <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/30 transition-colors duration-300"></div>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3 text-foreground">{product.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{product.description}</p>
+                  <h3 className="text-xl font-bold mb-3 text-white">{product.title}</h3>
+                  <p className="text-white/80 leading-relaxed">{product.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -208,30 +233,30 @@ const About = () => {
       </section>
 
       {/* Board of Directors */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-black/20 backdrop-blur-sm">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="section-title mb-6">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="section-title mb-6 text-white">
               Board of <span className="gradient-text">Directors</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-white/80 max-w-2xl mx-auto">
               Visionary leadership driving innovation and excellence in chemical solutions.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {directors.map((director, index) => (
-              <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow">
+              <Card key={index} className="text-center p-8 hover-lift transition-all duration-500 bg-white/10 backdrop-blur-sm border-white/20 scroll-animate-scale" style={{ animationDelay: `${index * 0.2}s` }}>
                 <CardContent className="p-0">
-                  <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gray-200">
+                  <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden bg-gradient-primary animate-pulse-custom">
                     <img
                       src={director.image}
                       alt={director.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">{director.name}</h3>
-                  <p className="text-muted-foreground">{director.title}</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{director.name}</h3>
+                  <p className="text-white/80">{director.title}</p>
                 </CardContent>
               </Card>
             ))}
@@ -243,26 +268,26 @@ const About = () => {
       <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="section-title mb-6">
+            <div className="text-center mb-16 scroll-animate">
+              <h2 className="section-title mb-6 text-white">
                 Frequently Asked <span className="gradient-text">Questions</span>
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-white/80">
                 Get answers to common questions about our services and expertise.
               </p>
             </div>
 
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-4 scroll-animate">
               {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border border-gray-200 rounded-lg px-6">
-                  <AccordionTrigger className="text-left font-semibold text-foreground hover:text-primary">
+                <AccordionItem key={index} value={`item-${index}`} className="border border-white/20 rounded-lg px-6 bg-white/10 backdrop-blur-sm hover-glow transition-all duration-300">
+                  <AccordionTrigger className="text-left font-semibold text-white hover:text-secondary transition-colors duration-300">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                  <AccordionContent className="text-white/80 leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
-              ))}
+                ))}
             </Accordion>
           </div>
         </div>
