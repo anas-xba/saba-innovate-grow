@@ -12,79 +12,87 @@ const Header = () => {
     { name: "About", href: "/about" },
     { name: "Products", href: "#" },
     { name: "Careers", href: "/careers" },
-    { name: "Contact", href: "#" },
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <header className="sticky top-0 z-50 py-4">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-gradient-primary rounded-lg">
-              <span className="text-primary-foreground font-bold text-xl">S</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-xl text-foreground">Saba Group</span>
-              <span className="text-xs text-muted-foreground hidden sm:block">Chemical Solutions</span>
-            </div>
-          </Link>
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 px-6 py-3">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2">
+              <div className="flex items-center justify-center w-8 h-8 bg-gradient-primary rounded-md">
+                <span className="text-primary-foreground font-bold text-sm">S</span>
+              </div>
+              <span className="font-bold text-lg text-gray-900">sabagroup</span>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`font-medium transition-colors hover:text-primary ${
-                  location.pathname === item.href
-                    ? "text-primary border-b-2 border-primary pb-1"
-                    : "text-foreground"
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Button variant="corporate" size="sm">
-              Get In Touch
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200">
-            <nav className="flex flex-col space-y-3">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`font-medium py-2 transition-colors hover:text-primary ${
-                    location.pathname === item.href ? "text-primary" : "text-foreground"
+                  className={`font-medium transition-colors hover:text-primary ${
+                    location.pathname === item.href
+                      ? "text-primary"
+                      : "text-gray-700"
                   }`}
-                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button variant="corporate" size="sm" className="mt-4 w-fit">
-                Get In Touch
-              </Button>
             </nav>
+
+            {/* Contact Us Button & Mobile Menu Button */}
+            <div className="flex items-center space-x-4">
+              <div className="hidden lg:flex">
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary-hover font-medium px-6 py-2 rounded-full"
+                >
+                  Contact Us
+                </Button>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                className="lg:hidden p-2 text-gray-700 hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
-        )}
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="lg:hidden mt-4 pt-4 border-t border-gray-200">
+              <nav className="flex flex-col space-y-3">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`font-medium py-2 transition-colors hover:text-primary ${
+                      location.pathname === item.href ? "text-primary" : "text-gray-700"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="bg-secondary text-secondary-foreground hover:bg-secondary-hover font-medium px-6 py-2 rounded-full mt-4 w-fit"
+                >
+                  Contact Us
+                </Button>
+              </nav>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
