@@ -109,7 +109,7 @@ const Careers = () => {
       </section>
 
       {/* Introduction Section */}
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -174,7 +174,7 @@ const Careers = () => {
       </section>
 
       {/* Career Opportunities */}
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">

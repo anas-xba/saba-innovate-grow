@@ -144,7 +144,7 @@ const Index = () => {
       </section>
 
       {/* Company Introduction */}
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -235,7 +235,7 @@ const Index = () => {
       </section>
 
       {/* Business Divisions */}
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">
@@ -295,7 +295,7 @@ const Index = () => {
       </section>
 
       {/* International Operations */}
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -368,7 +368,7 @@ const Index = () => {
       </section>
 
       {/* Client Testimonials */}
-      <section className="py-20 bg-background">
+      <section className="py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="section-title mb-6">
