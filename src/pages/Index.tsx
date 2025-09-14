@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckCircle, Award, Users, Globe, Factory, Phone, Truck, Star, ArrowRight } from "lucide-react";
-import heroWarehouse from "@/assets/hero-warehouse.jpg";
+import heroWarehouse from "@/assets/hero-warehouse.svg";
 import manufacturingImage from "@/assets/manufacturing.jpg";
 import laboratoryImage from "@/assets/laboratory.jpg";
 

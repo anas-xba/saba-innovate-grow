@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { CheckCircle, Award, Users, Globe, Factory, Shield } from "lucide-react";
-import aboutBuilding from "@/assets/about-building.jpg";
+import aboutBuilding from "@/assets/about-building.svg";
 import manufacturingImage from "@/assets/manufacturing.jpg";
 import laboratoryImage from "@/assets/laboratory.jpg";
 
